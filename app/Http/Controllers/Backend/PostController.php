@@ -6,12 +6,24 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::get();
+        $post = Post::all();
+        $id_user = Auth::user()->id;
+        $posts = Post::where('user_id', $id_user)->get();
+        if (Auth::user()->is_admin == 1) {
+            $posts = Post::all();
+        } elseif (Auth::user()->is_admin == 0) {
+            $id_user = Auth::user()->id;
+            $posts = Post::where('user_id', $id_user)->get();
+        } else {
+            return view('error-access-user');
+        }
+
         return view('backend.post.index' ,compact('posts'));
     }
 
