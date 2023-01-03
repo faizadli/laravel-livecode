@@ -62,7 +62,6 @@
                                 <td class="w-25"><img src="{{ asset('post') . '/' . $value->image }}" alt="" class="img-thumbnail"></td>
                                 <td>{!! $value->description !!}</td>
                                 <td>
-                                    <a href="{{ route('backend.show.post', $value->id) }}" class="btn btn-sm btn-primary"><i class="fas fa-search pe-1"></i> Show</a>
                                     <a href="{{ route('backend.edit.post', $value->id) }}" class="btn btn-sm btn-success"><i class="fas fa-pencil-alt pe-1"></i> Edit</a>
                                     <form action="{{ route('backend.delete.post', $value->id) }}" method="post" class="d-inline">
                                         @csrf

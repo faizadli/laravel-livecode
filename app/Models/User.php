@@ -24,6 +24,11 @@ class User extends Authenticatable
         'is_admin'
     ];
 
+    public function posts_user()
+    {
+        return $this->hasMany(Post::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
