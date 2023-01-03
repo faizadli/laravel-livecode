@@ -4,24 +4,25 @@
     User | Manage
 @endsection
 
+@section('javascript')
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('table').DataTable({
+                "pageLength" : 50
+            });
+        });
+    </script>
+@endsection
+
 @section('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
 @endsection
 
-@section('javascript')
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.bootstrap5.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('table').DataTable({
-                "pageLength" : 50
-            })
-        })
-    </script>
-@endsection
-
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -53,6 +54,7 @@
                             <th scope="col">No</th>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Role</th>
                             <th scope="col">Action</th>
                           </tr>
                         </thead>
@@ -62,6 +64,7 @@
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->email }}</td>
+                            <td>{{ $item->is_admin }}</td>
                             <td>
                                 @if (Auth::user()->is_admin == 0)
                                     @if (Auth::User()->name == $item->name)

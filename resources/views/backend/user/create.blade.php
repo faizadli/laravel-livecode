@@ -40,19 +40,27 @@
                                     class="form-control @error('password') text-danger is-invalid @enderror">
                                     @error('password')
                                         <small class="text-danger">{!! $message !!}</small>
-                                    @enderror
-                                </div>
+                                        @enderror
+                                    </div>
 
-                                <div class="mb-3">
-                                    <div class="mb-2 @error('password') text-danger fw-bold @enderror">Confirm Password:</div>
-                                    <input type="password" name="password_confirmation" value="{{ old('password') }}" placeholder="Password"
-                                    class="form-control @error('password') text-danger is-invalid @enderror">
-                                    @error('password')
+                                    <div class="mb-3">
+                                        <div class="mb-2 @error('password') text-danger fw-bold @enderror">Confirm Password:</div>
+                                        <input type="password" name="password_confirmation" value="{{ old('password') }}" placeholder="Password"
+                                        class="form-control @error('password') text-danger is-invalid @enderror">
+                                        @error('password')
                                         <small class="text-danger">{!! $message !!}</small>
-                                    @enderror
-                                </div>
+                                        @enderror
+                                    </div>
+                                    @if (Auth::User()->is_admin == 1)
+                                    <div class="mb-3">
+                                        <div class="form-check">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">Admin</label>
+                                            <input class="form-check-input" type="radio" id="flexSwitchCheckDefault" name='is_admin' value='1'>
+                                        </div>
+                                    </div>
+                                    @endif
 
-                                <button class="btn btn-dark">Create</button>
+                                    <button class="btn btn-dark">Create</button>
                             </div>
                         </div>
                     </form>

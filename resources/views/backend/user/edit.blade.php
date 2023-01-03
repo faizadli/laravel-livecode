@@ -35,14 +35,23 @@
                                     @enderror
                                 </div>
 
+
                                 <div class="mb-3">
                                     <div class="mb-2 @error('password') text-danger fw-bold @enderror">Password</div>
                                     <input type="password" name="password" value="{{ old('password') }}" placeholder="Password"
                                     class="form-control @error('password') text-danger is-invalid @enderror">
                                     @error('password')
-                                        <small class="text-danger">{!! $message !!}</small>
+                                    <small class="text-danger">{!! $message !!}</small>
                                     @enderror
                                 </div>
+                                @if (Auth::User()->is_admin == 1)
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" value="1" @if ($item->is_admin==1) checked @endif name="is_admin" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      Admin
+                                    </label>
+                                </div>
+                                @endif
 
                                 <button class="btn btn-dark">Update</button>
                             </div>

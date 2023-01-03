@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -36,7 +37,7 @@ class UserController extends Controller
         User::create([
             'name'  => $request->name,
             'email'  => $request->email,
-            'is_admin' => 0,
+            'is_admin'  => $request->is_admin,
             'password' => Hash::make($request->password)
         ]);
 
@@ -63,6 +64,7 @@ class UserController extends Controller
         User::where('id', $request->id)->update(([
             'name'  => $request->name,
             'email'  => $request->email,
+            'is_admin'  => (!$request->is_admin) ? 0 : 1,
             'password' => Hash::make($request->password)
         ]));
 
@@ -72,8 +74,9 @@ class UserController extends Controller
     public function destroy($id){
         $item = User::find($id);
 
-        $item->delete();
-
-        return redirect()->route('backend.manage.user')->with('success', 'Item deleted successfully');
+        if ($item->is_admin == 0){
+            $item->delete();
+            return redirect()->route('backend.manage.user')->with('success', 'Item deleted successfully');
+        }
     }
 }

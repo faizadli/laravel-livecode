@@ -94,7 +94,7 @@ class PostController extends Controller
         if( in_array($id,  $data_post_id) || Auth()->user()->is_admin == 1 ) {
             return view('backend.post.edit', $data);
         }else {
-            return abort(403);
+            return abort(404);
         }
 
         if ($id == null) {
